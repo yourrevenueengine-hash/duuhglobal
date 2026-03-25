@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUUH — Vote the First Drop</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #080808; --ink: #111110; --steel: #1e1e1c;
+  --iron: #2a2a28; --yellow: #f5c518; --white: #f0ede8;
+  --muted: #6a6860; --dim: #3a3a38; --red: #d63c1a;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; cursor: crosshair; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.5; }
+header { position: sticky; top: 0; z-index: 100; background: rgba(8,8,8,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(245,197,24,0.12); padding: 0 40px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 6px; color: var(--yellow); }
+.header-right { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); }
+.hero { padding: 80px 40px 60px; max-width: 1100px; margin: 0 auto; position: relative; }
+.hero-bg { position: absolute; top: 0; right: 0; font-family: 'Bebas Neue', sans-serif; font-size: clamp(100px, 18vw, 220px); color: transparent; -webkit-text-stroke: 1px rgba(245,197,24,0.05); letter-spacing: 8px; pointer-events: none; user-select: none; line-height: 1; }
+.eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--yellow); margin-bottom: 20px; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 110px); line-height: .92; letter-spacing: 2px; color: var(--white); margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: var(--yellow); position: relative; }
+.hero h1 em::after { content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 4px; background: var(--red); opacity: 0.7; transform: rotate(-0.8deg); }
+.hero p { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px; margin-bottom: 32px; }
+.hero p strong { color: var(--white); }
+.rules { display: flex; gap: 16px; flex-wrap: wrap; }
+.rule { background: var(--steel); border: 1px solid rgba(245,197,24,0.1); border-left: 3px solid var(--yellow); padding: 12px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--muted); }
+.rule span { color: var(--white); }
+.tab-section { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.tab-bar { display: flex; border-bottom: 1px solid rgba(245,197,24,0.1); margin-bottom: 48px; }
+.tab-btn { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--muted); background: none; border: none; border-bottom: 3px solid transparent; padding: 16px 32px 14px; cursor: pointer; transition: all .15s; position: relative; top: 1px; }
+.tab-btn:hover { color: var(--white); }
+.tab-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+.tab-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-left: 8px; vertical-align: middle; }
+.shoe-grid { display: none; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 80px; }
+.shoe-grid.active { display: grid; }
+.shoe-card { background: var(--steel); border: 2px solid transparent; cursor: pointer; transition: all .2s; position: relative; overflow: hidden; }
+.shoe-card:hover { border-color: rgba(245,197,24,0.4); background: var(--iron); transform: translateY(-2px); }
+.shoe-card.selected { border-color: var(--yellow); background: var(--iron); }
+.shoe-card.selected .checkmark { display: flex; }
+.checkmark { display: none; position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; background: var(--yellow); color: var(--black); font-size: 13px; font-weight: 900; align-items: center; justify-content: center; border-radius: 50%; font-family: 'Barlow', sans-serif; }
+.shoe-img-wrap { background: #fff; padding: 12px; aspect-ratio: 16/9; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.shoe-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.shoe-img-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 11px; color: #999; letter-spacing: 1px; text-align: center; padding: 8px; }
+.shoe-info { padding: 14px 16px; display: flex; align-items: center; }
+.shoe-num { background: var(--yellow); color: var(--black); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: 4px; }
+.shoe-name { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--white); margin-left: 12px; flex: 1; }
+.shoe-style { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+.vote-btn { display: block; width: 100%; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); background: var(--ink); border: none; border-top: 1px solid rgba(245,197,24,0.08); padding: 12px; cursor: pointer; transition: all .15s; }
+.vote-btn:hover { color: var(--yellow); background: rgba(245,197,24,0.05); }
+.shoe-card.selected .vote-btn { color: var(--yellow); background: rgba(245,197,24,0.08); }
+.voted-all .vote-btn { cursor: default; }
+.modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--ink); border: 1px solid rgba(245,197,24,0.2); border-top: 3px solid var(--yellow); padding: 40px; max-width: 480px; width: 100%; position: relative; animation: modalIn .25s ease; }
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; cursor: pointer; color: var(--muted); font-size: 20px; transition: color .15s; }
+.modal-close:hover { color: var(--white); }
+.modal-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--yellow); text-transform: uppercase; margin-bottom: 8px; }
+.modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; color: var(--white); margin-bottom: 4px; line-height: 1; }
+.modal-selection { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--yellow); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.modal-shoe-preview { background: #fff; padding: 12px; margin-bottom: 24px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.modal-shoe-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.field-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: block; }
+.modal input[type="email"] { background: var(--steel); border: 1px solid rgba(245,197,24,0.2); color: var(--white); font-family: 'Barlow', sans-serif; font-size: 16px; padding: 14px 16px; width: 100%; outline: none; transition: border-color .15s; margin-bottom: 8px; }
+.modal input[type="email"]:focus { border-color: var(--yellow); }
+.modal input[type="email"]::placeholder { color: var(--muted); }
+.modal-note { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+.submit-btn { width: 100%; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 4px; color: var(--black); background: var(--yellow); border: none; padding: 16px; cursor: pointer; clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); transition: all .15s; }
+.submit-btn:hover { background: var(--white); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.thanks { text-align: center; padding: 20px 0; }
+.thanks-icon { font-size: 48px; margin-bottom: 16px; }
+.thanks-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 2px; color: var(--yellow); margin-bottom: 8px; }
+.thanks-sub { font-size: 14px; color: var(--muted); line-height: 1.7; }
+footer { background: var(--steel); border-top: 1px solid rgba(245,197,24,0.08); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 5px; color: var(--muted); }
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+@media (max-width: 600px) {
+  header, .hero, .tab-section { padding-left: 20px; padding-right: 20px; }
+  .shoe-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .tab-btn { font-size: 18px; padding: 14px 18px 12px; }
+  .modal { padding: 28px 20px; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DUUH</div>
+  <div class="header-right" id="header-status">Cast your vote below</div>
+</header>
+
+<div class="hero">
+  <div class="hero-bg">DUUH</div>
+  <div class="eyebrow">// Pre-launch vote · duuhglobal.com</div>
+  <h1>You decide<br>the <em>first</em><br>drop.</h1>
+  <p>Two silhouettes. 33 colorways. <strong>Only the top voted make the first production run.</strong> Vote your favorite, drop your email, and we'll let you know when it's real.</p>
+  <div class="rules">
+    <div class="rule"><span>Low-top</span> — 18 colorways</div>
+    <div class="rule"><span>Mid-top</span> — 15 colorways</div>
+    <div class="rule"><span>One vote</span> per person</div>
+    <div class="rule"><span>First drop</span> notified by email</div>
+  </div>
+</div>
+
+<div class="tab-section">
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tab-low" onclick="switchTab('low', this)">Low-Top <span class="tab-count">18</span></button>
+    <button class="tab-btn" id="tab-mid" onclick="switchTab('mid', this)">Mid-Top <span class="tab-count">15</span></button>
+  </div>
+  <div class="shoe-grid active" id="grid-low"></div>
+  <div class="shoe-grid" id="grid-mid"></div>
+</div>
+
+<footer>
+  <div class="footer-logo">DUUH GLOBAL</div>
+  <div class="footer-copy">duuhglobal.com &nbsp;·&nbsp; Anatomically correct skate &amp; lifestyle footwear</div>
+</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+const LOW = [
+  {num:1,name:'Black/gum'},{num:2,name:'Black'},{num:3,name:'Black/white'},
+  {num:4,name:'Navy/blue/gum'},{num:5,name:'Navy/gum'},{num:6,name:'Navy/blue'},
+  {num:7,name:'Black/dark grey'},{num:8,name:'Dark grey/gum'},{num:9,name:'Dark grey'},
+  {num:10,name:'Maroon/blk'},{num:11,name:'Maroon/gum'},{num:12,name:'Maroon/blk/gum'},
+  {num:13,name:'Grey/white'},{num:14,name:'Tan/gum'},{num:15,name:'White/grey'},
+  {num:16,name:'Brown/tan'},{num:17,name:'Brown/gum'},{num:18,name:'Brown'}
+];
+const MID = [
+  {num:1,name:'Black/gum'},{num:2,name:'Black/grey/gum'},{num:3,name:'Grey/gum'},
+  {num:4,name:'White/gum'},{num:5,name:'White/grey'},{num:6,name:'White/black'},
+  {num:7,name:'Red/gum'},{num:8,name:'Red/blk'},{num:9,name:'Red/grey'},
+  {num:10,name:'Grey/red/blk'},{num:11,name:'Red/grey/blk'},{num:12,name:'Grey/brown/blk'},
+  {num:13,name:'Brown/grey/gum'},{num:14,name:'Brown/beige/gum'},{num:15,name:'Brown/gum'}
+];
+
+// ── FORMSPREE ──
+// 1. Go to formspree.io → sign up free → New Form
+// 2. Copy the form ID from the endpoint (looks like: xyzabcde)
+// 3. Replace xojpqawv below with that ID
+const FORMSPREE_ID = 'xojpqawv';
+
+let selectedType = null, selectedNum = null;
+let hasVoted = localStorage.getItem('duuh_voted') === '1';
+
+function buildGrid(type, data, containerId) {
+  const el = document.getElementById(containerId);
+  const savedChoice = localStorage.getItem('duuh_vote_choice');
+  el.innerHTML = data.map(shoe => {
+    const isSelected = hasVoted && savedChoice === `${type}-${shoe.num}`;
+    return `<div class="shoe-card${isSelected?' selected':''}" id="card-${type}-${shoe.num}" onclick="selectShoe('${type}',${shoe.num},'${shoe.name}')">
+      <div class="checkmark">✓</div>
+      <div class="shoe-img-wrap">
+        <img src="images/${type}-${shoe.num}.png" alt="${shoe.name}"
+             onerror="this.outerHTML='<div class=\\'shoe-img-placeholder\\'>${type.toUpperCase()} #${shoe.num}<br>${shoe.name}</div>'">
+      </div>
+      <div class="shoe-info">
+        <div class="shoe-num">${shoe.num}</div>
+        <div class="shoe-name">${shoe.name}</div>
+        <div class="shoe-style">${type.toUpperCase()}</div>
+      </div>
+      <button class="vote-btn">${hasVoted?(isSelected?'Your Vote':'Voted'):'Vote This'}</button>
+    </div>`;
+  }).join('');
+}
+
+buildGrid('low', LOW, 'grid-low');
+buildGrid('mid', MID, 'grid-mid');
+
+if (hasVoted) {
+  document.getElementById('header-status').textContent = 'Vote locked — thanks!';
+}
+
+function switchTab(type, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.shoe-grid').forEach(g => g.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('grid-'+type).classList.add('active');
+}
+
+function selectShoe(type, num, name) {
+  if (hasVoted) return;
+  selectedType = type; selectedNum = num;
+  const content = document.getElementById('modal-content');
+  content.innerHTML = `
+    <div class="modal-eyebrow">// Your vote</div>
+    <div class="modal-title">Lock It In</div>
+    <div class="modal-selection">${type.toUpperCase()}-TOP #${num} — ${name}</div>
+    <div class="modal-shoe-preview">
+      <img src="images/${type}-${num}.png" alt="${name}" onerror="this.style.display='none'">
+    </div>
+    <label class="field-label">Your email</label>
+    <input type="email" id="vote-email" placeholder="you@email.com" autocomplete="email">
+    <p class="modal-note">We'll email you when this colorway goes into production. No spam — one email when it's real.</p>
+    <button class="submit-btn" onclick="submitVote('${type}',${num},'${name}')">Cast My Vote →</button>
+  `;
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => { const e = document.getElementById('vote-email'); if(e) e.focus(); }, 100);
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  selectedType = null; selectedNum = null;
+}
+
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+async function submitVote(type, num, name) {
+  const emailEl = document.getElementById('vote-email');
+  const email = emailEl.value.trim();
+  if (!email || !email.includes('@')) {
+    emailEl.style.borderColor = '#d63c1a'; emailEl.focus(); return;
+  }
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Submitting...'; btn.disabled = true;
+
+  try {
+    if (FORMSPREE_ID !== 'xojpqawv') {
+      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          email, vote: `${type.toUpperCase()}-TOP #${num} — ${name}`,
+          style: type, colorway_num: num, colorway_name: name,
+          _subject: `DUUH Vote: ${type.toUpperCase()} #${num} ${name}`
+        })
+      });
+    }
+  } catch(e) {}
+  markVoted(type, num, name);
+}
+
+function markVoted(type, num, name) {
+  hasVoted = true;
+  localStorage.setItem('duuh_voted', '1');
+  localStorage.setItem('duuh_vote_choice', `${type}-${num}`);
+  document.querySelectorAll('.vote-btn').forEach(b => b.textContent = 'Voted');
+  document.querySelectorAll('.shoe-card').forEach(c => c.classList.remove('selected'));
+  const card = document.getElementById(`card-${type}-${num}`);
+  if (card) { card.classList.add('selected'); card.querySelector('.vote-btn').textContent = 'Your Vote'; }
+  document.getElementById('header-status').textContent = 'Vote locked — thanks!';
+  document.getElementById('modal-content').innerHTML = `
+    <div class="thanks">
+      <div class="thanks-icon">✓</div>
+      <div class="thanks-title">Vote Locked</div>
+      <div class="modal-selection">${type.toUpperCase()}-TOP #${num} — ${name}</div>
+      <p class="thanks-sub">You're on the list. When this colorway goes into production, you'll be the first to know.<br><br>Tell someone who skates.</p>
+    </div>
+  `;
+  setTimeout(() => closeModal(), 4000);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
