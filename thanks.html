@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>votes locked — duuh global</title>
+<meta name="description" content="Your duuh vote is in. When your colorways go into production you'll be the first to know. duuhglobal.com — anatomically correct skate and lifestyle footwear.">
+<meta name="keywords" content="duuh shoes, skate shoes, vote confirmation, duuh global, anatomically correct skate shoes">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://duuhglobal.com/thanks.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://duuhglobal.com/">
+<meta property="og:title" content="duuh — vote the first drop">
+<meta property="og:description" content="Two silhouettes. 33 colorways. The ones with the most votes go into production first. Cast your vote at duuhglobal.com">
+<meta property="og:image" content="https://duuhglobal.com/images/og-image.jpg">
+<meta property="og:site_name" content="duuh global">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="duuh — vote the first drop">
+<meta name="twitter:description" content="just voted on the first duuh drop. shoes shaped like feet. you should too. duuhglobal.com">
+<meta name="twitter:image" content="https://duuhglobal.com/images/og-image.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --black:#0a0906; --dark:#131210; --surface:#1c1a17; --iron:#2a2720; --gum:#C19A6B; --yellow:#F5C800; --white:#f2ede6; --muted:#7a7060; --red:#c73a1a; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; min-height: 100vh; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.6; }
+
+nav { position: sticky; top: 0; z-index: 100; background: rgba(10,9,6,0.95); backdrop-filter: blur(10px); border-bottom: 2px solid var(--gum); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'Permanent Marker', cursive; font-size: 32px; color: var(--gum); text-decoration: none; letter-spacing: 2px; text-shadow: 3px 3px 0px rgba(193,154,107,0.2); transition: color .15s; }
+.nav-logo:hover { color: var(--yellow); }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-back { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 8px 14px; transition: color .15s; }
+.nav-back:hover { color: var(--gum); }
+.nav-shop { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--black); background: var(--gum); padding: 8px 20px; text-decoration: none; clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%); transition: background .15s; }
+.nav-shop:hover { background: var(--yellow); }
+
+.main { max-width: 560px; margin: 0 auto; padding: 80px 40px 60px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
+
+.spray-circle { width: 120px; height: 120px; background: radial-gradient(circle, rgba(193,154,107,0.15) 0%, transparent 70%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; animation: pulseIn .6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+@keyframes pulseIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.check-mark { font-family: 'Permanent Marker', cursive; font-size: 64px; color: var(--gum); text-shadow: 4px 4px 0 rgba(0,0,0,0.3); line-height: 1; }
+
+.eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 5px; color: var(--gum); text-transform: uppercase; margin-bottom: 12px; opacity: 0; animation: fadeUp .5s ease forwards .3s; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+h1 { font-family: 'Permanent Marker', cursive; font-size: clamp(52px, 10vw, 80px); color: var(--white); line-height: .95; text-shadow: 4px 4px 0 rgba(0,0,0,0.4); margin-bottom: 28px; opacity: 0; animation: fadeUp .5s ease forwards .4s; }
+h1 .gum { color: var(--gum); }
+
+.votes-display { width: 100%; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; opacity: 0; animation: fadeUp .5s ease forwards .5s; }
+.vote-row { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid rgba(193,154,107,0.2); border-left: 3px solid var(--gum); padding: 14px 18px; text-align: left; }
+.vote-row-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; width: 60px; flex-shrink: 0; }
+.vote-row-choice { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gum); }
+
+.body-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 400px; margin-bottom: 36px; opacity: 0; animation: fadeUp .5s ease forwards .6s; }
+.body-text strong { color: var(--white); }
+
+.divider { width: 100%; height: 1px; background: rgba(193,154,107,0.15); margin-bottom: 28px; opacity: 0; animation: fadeUp .5s ease forwards .7s; }
+
+/* SHARE SECTION */
+.share-section { width: 100%; opacity: 0; animation: fadeUp .5s ease forwards .8s; margin-bottom: 32px; }
+.share-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+.share-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+.share-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gum); padding: 10px 18px; text-decoration: none; clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%); transition: background .15s; cursor: pointer; border: none; }
+.share-btn:hover { background: var(--yellow); }
+.share-btn.ghost { background: transparent; color: var(--gum); border: 1px solid rgba(193,154,107,0.35); clip-path: none; font-size: 12px; }
+.share-btn.ghost:hover { background: rgba(193,154,107,0.08); }
+.copy-confirm { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gum); letter-spacing: 2px; margin-top: 8px; height: 16px; transition: opacity .3s; opacity: 0; }
+.copy-confirm.show { opacity: 1; }
+
+/* SHOP NUDGE */
+.shop-nudge { width: 100%; background: var(--surface); border: 1px solid rgba(193,154,107,0.15); border-top: 3px solid var(--gum); padding: 24px; margin-bottom: 32px; opacity: 0; animation: fadeUp .5s ease forwards .9s; }
+.shop-nudge-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+.shop-nudge p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.shop-nudge a { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gum); padding: 10px 20px; text-decoration: none; clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%); transition: background .15s; display: inline-block; }
+.shop-nudge a:hover { background: var(--yellow); }
+
+.back-link { font-family: 'Permanent Marker', cursive; font-size: 18px; color: var(--muted); text-decoration: none; letter-spacing: 1px; transition: color .15s; display: inline-block; opacity: 0; animation: fadeUp .5s ease forwards 1s; }
+.back-link:hover { color: var(--gum); }
+
+footer { background: var(--surface); border-top: 2px solid rgba(193,154,107,0.15); padding: 28px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+.footer-logo { font-family: 'Permanent Marker', cursive; font-size: 20px; color: var(--muted); letter-spacing: 2px; }
+.footer-links { display: flex; gap: 16px; }
+.footer-link { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .15s; }
+.footer-link:hover { color: var(--gum); }
+
+@media (max-width: 600px) {
+  nav { padding: 0 20px; }
+  .main { padding: 60px 20px 40px; }
+  .nav-back span { display: none; }
+  footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+  .share-btns { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">duuh</a>
+  <div class="nav-links">
+    <a href="/" class="nav-back">← back to vote</a>
+    <a href="https://YOUR-SHOPIFY-STORE.myshopify.com" target="_blank" class="nav-shop">shop →</a>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="spray-circle">
+    <div class="check-mark">✓</div>
+  </div>
+
+  <div class="eyebrow">// both votes received</div>
+  <h1>votes<br><span class="gum">locked.</span></h1>
+
+  <div class="votes-display">
+    <div class="vote-row">
+      <div class="vote-row-label">low-top</div>
+      <div class="vote-row-choice" id="low-display">—</div>
+    </div>
+    <div class="vote-row">
+      <div class="vote-row-label">mid-top</div>
+      <div class="vote-row-choice" id="mid-display">—</div>
+    </div>
+  </div>
+
+  <p class="body-text">
+    you're on the list.<br>
+    <strong>when your colorways go into production, you'll be the first to know.</strong><br><br>
+    no spam. one email. when it's real.
+  </p>
+
+  <div class="divider"></div>
+
+  <div class="share-section">
+    <div class="share-label">// tell someone who skates</div>
+    <div class="share-btns">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://duuhglobal.com" target="_blank" class="share-btn">facebook</a>
+      <a href="https://twitter.com/intent/tweet?text=just+voted+on+the+first+duuh+drop.+shoes+shaped+like+feet.+you+should+too.&url=https://duuhglobal.com" target="_blank" class="share-btn">x / twitter</a>
+      <a href="https://wa.me/?text=just+voted+on+the+first+duuh+drop.+shoes+shaped+like+feet.+check+it+out+https://duuhglobal.com" target="_blank" class="share-btn">whatsapp</a>
+      <button class="share-btn ghost" onclick="copyLink()">copy link</button>
+    </div>
+    <div class="copy-confirm" id="copy-confirm">// link copied</div>
+  </div>
+
+  <div class="shop-nudge">
+    <div class="shop-nudge-label">// while you wait</div>
+    <p>first drop goes to voters. shop opens when production is confirmed. get familiar with what's coming.</p>
+    <a href="https://YOUR-SHOPIFY-STORE.myshopify.com" target="_blank">visit the shop →</a>
+  </div>
+
+  <a href="/" class="back-link">← back to duuhglobal.com</a>
+</div>
+
+<footer>
+  <div class="footer-logo">duuh global</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">vote</a>
+    <a href="https://YOUR-SHOPIFY-STORE.myshopify.com" class="footer-link" target="_blank">shop</a>
+    <a href="mailto:yourrevenueengine@gmail.com" class="footer-link">contact</a>
+  </div>
+</footer>
+
+<script>
+// Pull vote choices — URL params first, localStorage as fallback
+var params = new URLSearchParams(window.location.search);
+var low = params.get('low');
+var mid = params.get('mid');
+
+// Fallback to localStorage if URL params are missing
+if (!low) {
+  var storedLow = JSON.parse(localStorage.getItem('duuh_vote_low') || 'null');
+  if (storedLow) low = '#' + storedLow.num + ' ' + storedLow.name;
+}
+if (!mid) {
+  var storedMid = JSON.parse(localStorage.getItem('duuh_vote_mid') || 'null');
+  if (storedMid) mid = '#' + storedMid.num + ' ' + storedMid.name;
+}
+
+if (low) document.getElementById('low-display').textContent = decodeURIComponent(low);
+if (mid) document.getElementById('mid-display').textContent = decodeURIComponent(mid);
+
+function copyLink() {
+  navigator.clipboard.writeText('https://duuhglobal.com').then(function() {
+    var confirm = document.getElementById('copy-confirm');
+    confirm.classList.add('show');
+    setTimeout(function() { confirm.classList.remove('show'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
